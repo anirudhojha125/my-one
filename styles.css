@@ -7,9 +7,12 @@ body {
     margin: 0;
     background: linear-gradient(135deg, #ffafbd, #ffc3a0);
     background-size: 200% 200%;
-    animation: gradientBG 10s ease infinite; /* Faster animation */
+    animation: gradientBG 20s ease infinite; /* Slower animation for better performance */
     overflow: hidden;
     position: relative;
+    /* Add hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 @keyframes gradientBG {
@@ -24,14 +27,16 @@ body {
     }
 }
 
-/* Floating elements */
+/* Floating elements with optimized performance */
 .rose-petal {
     position: absolute;
     font-size: 1.2rem;
     opacity: 0.5;
-    animation: floatRose 30s linear infinite; /* Faster animation */
+    animation: floatRose 60s linear infinite; /* Slower animation */
     z-index: 5;
     pointer-events: none;
+    /* Hardware acceleration */
+    transform: translateZ(0);
     will-change: transform;
 }
 
@@ -40,16 +45,18 @@ body {
         transform: translateY(100vh) rotate(0deg);
     }
     100% {
-        transform: translateY(-100px) rotate(360deg); /* Full rotation */
+        transform: translateY(-100px) rotate(180deg);
     }
 }
 
 .cupid {
     position: absolute;
     font-size: 1.8rem;
-    animation: flyCupid 60s linear infinite; /* Faster animation */
+    animation: flyCupid 120s linear infinite; /* Slower animation */
     z-index: 5;
     pointer-events: none;
+    /* Hardware acceleration */
+    transform: translateZ(0);
     will-change: transform;
 }
 
@@ -69,8 +76,11 @@ body {
     position: absolute;
     font-size: 1.2rem;
     color: #ff6b6b;
-    animation: float 20s ease-in infinite; /* Faster animation */
+    animation: float 40s ease-in infinite; /* Slower animation */
     z-index: 5;
+    pointer-events: none;
+    /* Hardware acceleration */
+    transform: translateZ(0);
     will-change: transform;
 }
 
@@ -80,10 +90,10 @@ body {
         opacity: 0;
     }
     10% {
-        opacity: 0.7;
+        opacity: 0.5;
     }
     90% {
-        opacity: 0.7;
+        opacity: 0.5;
     }
     100% {
         transform: translateY(-100px) rotate(180deg);
@@ -105,6 +115,8 @@ body {
     min-width: 300px;
     display: inline-block;
     margin: 20px;
+    /* Hardware acceleration */
+    transform: translateZ(0);
 }
 
 .container::before {
@@ -117,7 +129,10 @@ body {
     background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
     border-radius: 15px;
     z-index: -1;
-    animation: borderAnimation 5s ease infinite; /* Faster animation */
+    animation: borderAnimation 10s ease infinite; /* Slower animation */
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 @keyframes borderAnimation {
@@ -126,8 +141,8 @@ body {
         opacity: 0.5;
     }
     50% {
-        transform: scale(1.01);
-        opacity: 0.8;
+        transform: scale(1.005);
+        opacity: 0.7;
     }
     100% {
         transform: scale(1);
@@ -141,13 +156,13 @@ body {
 
 .page.active {
     display: block;
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(5px);
     }
     to {
         opacity: 1;
@@ -180,7 +195,7 @@ body {
     top: -15px;
     right: -30px;
     font-size: 1.5rem;
-    animation: heartbeat 2s ease infinite; /* Faster animation */
+    animation: heartbeat 4s ease infinite; /* Slower animation */
 }
 
 @keyframes heartbeat {
@@ -188,7 +203,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.3);
+        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
@@ -197,9 +212,15 @@ body {
 
 /* Special animation for the final page message */
 #page4 .message-box h1 {
-    animation: revealMessage 1.5s ease-out forwards;
+    font-size: 3rem;
+    color: #ff4d6d;
+    text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
+    animation: romanticGlow 6s infinite, revealMessage 1.5s ease-out forwards; /* Slower animations */
     opacity: 0;
     transform: scale(0.8);
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 @keyframes revealMessage {
@@ -214,6 +235,18 @@ body {
     100% {
         opacity: 1;
         transform: scale(1) translateZ(0);
+    }
+}
+
+@keyframes romanticGlow {
+    0% {
+        text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(255, 77, 109, 0.9), 0 0 35px rgba(255, 77, 109, 0.6);
+    }
+    100% {
+        text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
     }
 }
 
@@ -232,7 +265,7 @@ body {
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease; /* Faster transition */
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -240,24 +273,24 @@ body {
     z-index: 15;
     min-width: 100px;
     font-family: 'Georgia', serif;
+    /* Hardware acceleration */
     transform: translateZ(0);
     will-change: transform;
 }
 
-/* Removed the ::before pseudo-element that was causing lag */
 .yes-btn {
     background: linear-gradient(45deg, #ff4d6d, #ff758f);
     color: white;
     border: 1px solid #ff4d6d;
-    animation: pulse 4s infinite; /* Faster animation */
+    animation: pulse 8s infinite; /* Slower animation */
 }
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.3);
+        box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.2);
     }
     70% {
-        box-shadow: 0 0 0 5px rgba(255, 77, 109, 0);
+        box-shadow: 0 0 0 3px rgba(255, 77, 109, 0);
     }
     100% {
         box-shadow: 0 0 0 0 rgba(255, 77, 109, 0);
@@ -266,8 +299,8 @@ body {
 
 .yes-btn:hover {
     background: linear-gradient(45deg, #ff758f, #ff4d6d);
-    transform: translateY(-3px) translateZ(0);
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+    transform: translateY(-2px) translateZ(0);
+    box-shadow: 0 4px 10px rgba(255, 77, 109, 0.2);
 }
 
 .no-btn {
@@ -279,8 +312,8 @@ body {
 
 .no-btn:hover {
     background: linear-gradient(45deg, #ffccd5, #ffb3c1);
-    transform: translateY(-3px) translateZ(0);
-    box-shadow: 0 5px 15px rgba(255, 179, 193, 0.3);
+    transform: translateY(-2px) translateZ(0);
+    box-shadow: 0 4px 10px rgba(255, 179, 193, 0.2);
 }
 
 .thank-you-message {
@@ -292,28 +325,6 @@ body {
     font-family: 'Georgia', serif;
 }
 
-/* Larger styling for the final romantic page */
-#page4 .message-box h1 {
-    font-size: 3rem;
-    color: #ff4d6d;
-    text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
-    animation: romanticGlow 3s infinite, revealMessage 1.5s ease-out forwards; /* Combined animations */
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-@keyframes romanticGlow {
-    0% {
-        text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
-    }
-    50% {
-        text-shadow: 0 0 25px rgba(255, 77, 109, 0.9), 0 0 35px rgba(255, 77, 109, 0.6);
-    }
-    100% {
-        text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
-    }
-}
-
 /* Love letter effect */
 .love-letter {
     position: absolute;
@@ -323,10 +334,13 @@ body {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     max-width: 250px;
     z-index: 15;
-    animation: floatLetter 20s ease-in-out infinite; /* Faster animation */
+    animation: floatLetter 40s ease-in-out infinite; /* Slower animation */
     font-size: 1rem;
     font-family: 'Georgia', serif;
     border: 1px solid rgba(255, 107, 107, 0.2);
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 @keyframes floatLetter {
@@ -334,13 +348,13 @@ body {
         transform: translate(0, 0) rotate(0deg);
     }
     25% {
-        transform: translate(10px, -10px) rotate(2deg);
+        transform: translate(5px, -5px) rotate(1deg);
     }
     50% {
-        transform: translate(0, -20px) rotate(0deg);
+        transform: translate(0, -10px) rotate(0deg);
     }
     75% {
-        transform: translate(-10px, -10px) rotate(-2deg);
+        transform: translate(-5px, -5px) rotate(-1deg);
     }
 }
 
@@ -350,7 +364,10 @@ body {
     font-size: 1.5rem;
     opacity: 0;
     z-index: 4;
-    animation: sparkle 2s ease-out; /* Faster animation */
+    animation: sparkle 1.5s ease-out; /* Faster animation */
+    /* Hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 @keyframes sparkle {
@@ -360,7 +377,7 @@ body {
     }
     50% {
         opacity: 1;
-        transform: scale(1.5);
+        transform: scale(1.2);
     }
     100% {
         opacity: 0;

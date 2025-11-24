@@ -24,15 +24,15 @@ $(document).ready(function() {
 
     // Performance optimization: limit the number of elements
     let elementCount = 0;
-    const maxElements = 30; // Increased for more animations
+    const maxElements = 15; // Reduced from 30 to 15 for better performance
 
     // Track active love letters
     let activeLetters = [];
 
     // Create floating hearts for Valentine's theme
     function createHearts() {
-        // Create 8 hearts total for more animation
-        for (let i = 0; i < 8; i++) {
+        // Create 5 hearts total (reduced from 8 for better performance)
+        for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -40,9 +40,9 @@ $(document).ready(function() {
                 heart.addClass('heart');
                 heart.css({
                     'left': Math.random() * 100 + 'vw',
-                    'animationDuration': (Math.random() * 15 + 10) + 's',
-                    'fontSize': (Math.random() * 15 + 10) + 'px',
-                    'opacity': (Math.random() * 0.5 + 0.3),
+                    'animationDuration': (Math.random() * 30 + 30) + 's', // Slower animations
+                    'fontSize': (Math.random() * 10 + 8) + 'px', // Smaller size range
+                    'opacity': (Math.random() * 0.3 + 0.2), // Lower opacity
                     'color': getRandomColor()
                 });
                 $('body').append(heart);
@@ -57,14 +57,14 @@ $(document).ready(function() {
                         createHearts();
                     }
                 }, parseFloat(heart.css('animationDuration')) * 1000);
-            }, i * 500); // Faster creation
+            }, i * 1000); // Slower creation
         }
     }
 
     // Create rose petals
     function createRosePetals() {
-        // Create 5 petals total for more animation
-        for (let i = 0; i < 5; i++) {
+        // Create 3 petals total (reduced from 5 for better performance)
+        for (let i = 0; i < 3; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -72,9 +72,9 @@ $(document).ready(function() {
                 petal.addClass('rose-petal');
                 petal.css({
                     'left': Math.random() * 100 + 'vw',
-                    'animationDuration': (Math.random() * 20 + 15) + 's',
-                    'fontSize': (Math.random() * 15 + 10) + 'px',
-                    'opacity': (Math.random() * 0.4 + 0.2)
+                    'animationDuration': (Math.random() * 40 + 40) + 's', // Slower animations
+                    'fontSize': (Math.random() * 10 + 8) + 'px', // Smaller size range
+                    'opacity': (Math.random() * 0.2 + 0.1) // Lower opacity
                 });
                 $('body').append(petal);
                 elementCount++;
@@ -88,14 +88,14 @@ $(document).ready(function() {
                         createRosePetals();
                     }
                 }, parseFloat(petal.css('animationDuration')) * 1000);
-            }, i * 800); // Faster creation
+            }, i * 2000); // Slower creation
         }
     }
 
     // Create floating cupids
     function createCupids() {
-        // Create 3 cupids total for more animation
-        for (let i = 0; i < 3; i++) {
+        // Create 2 cupids total (reduced from 3 for better performance)
+        for (let i = 0; i < 2; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -103,9 +103,9 @@ $(document).ready(function() {
                 cupid.addClass('cupid');
                 cupid.css({
                     'top': Math.random() * 100 + 'vh',
-                    'animationDuration': (Math.random() * 40 + 30) + 's',
-                    'fontSize': (Math.random() * 20 + 15) + 'px',
-                    'opacity': (Math.random() * 0.6 + 0.3)
+                    'animationDuration': (Math.random() * 80 + 80) + 's', // Slower animations
+                    'fontSize': (Math.random() * 15 + 12) + 'px', // Smaller size range
+                    'opacity': (Math.random() * 0.3 + 0.2) // Lower opacity
                 });
                 $('body').append(cupid);
                 elementCount++;
@@ -119,7 +119,7 @@ $(document).ready(function() {
                         createCupids();
                     }
                 }, parseFloat(cupid.css('animationDuration')) * 1000);
-            }, i * 2000); // Faster creation
+            }, i * 3000); // Slower creation
         }
     }
 
@@ -138,7 +138,7 @@ $(document).ready(function() {
             "You are the missing piece I've been searching for 🧩"
         ];
         
-        // Create letters more frequently but limit to 2 at a time
+        // Create letters less frequently but limit to 2 at a time
         setInterval(() => {
             // Remove old letters if we have 2 already
             while (activeLetters.length >= 2) {
@@ -165,7 +165,7 @@ $(document).ready(function() {
                 // Track this letter
                 activeLetters.push(letter[0]);
                 
-                // Remove letter after 10 seconds (faster)
+                // Remove letter after 15 seconds (slower)
                 setTimeout(() => {
                     const index = activeLetters.indexOf(letter[0]);
                     if (index > -1) {
@@ -175,24 +175,25 @@ $(document).ready(function() {
                         letter.remove();
                         elementCount--;
                     }
-                }, 10000);
+                }, 15000);
             }
-        }, 5000); // Create new letter every 5 seconds (more frequent)
+        }, 10000); // Create new letter every 10 seconds (slower)
     }
 
     // Create romantic sparkles when buttons are hovered
     function createSparkles(x, y) {
-        for (let i = 0; i < 8; i++) { // More sparkles
+        // Reduce number of sparkles from 8 to 5 for better performance
+        for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
                 const sparkle = $('<div>✨</div>');
                 sparkle.addClass('romantic-sparkle');
                 sparkle.css({
-                    'left': (x + (Math.random() * 60 - 30)) + 'px', // Wider spread
-                    'top': (y + (Math.random() * 60 - 30)) + 'px', // Wider spread
+                    'left': (x + (Math.random() * 40 - 20)) + 'px', // Narrower spread
+                    'top': (y + (Math.random() * 40 - 20)) + 'px', // Narrower spread
                     'color': getRandomSparkleColor(),
-                    'fontSize': (Math.random() * 20 + 15) + 'px' // Variable sizes
+                    'fontSize': (Math.random() * 15 + 10) + 'px' // Smaller size range
                 });
                 $('body').append(sparkle);
                 elementCount++;
@@ -201,29 +202,48 @@ $(document).ready(function() {
                 setTimeout(() => {
                     sparkle.remove();
                     elementCount--;
-                }, 2000); // Faster removal
-            }, i * 50); // Faster creation
+                }, 1500); // Faster removal
+            }, i * 30); // Faster creation
         }
     }
 
     // Get random romantic color for text
     function getRandomColor() {
-        const colors = ['#ff6b6b', '#ff8e8e', '#ffb3c1', '#ffccd5', '#ff758f', '#ff4d6d', '#d32f2f'];
+        const colors = ['#ff6b6b', '#ff8e8e', '#ffb3c1', '#ffccd5', '#ff758f', '#ff4d6d'];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
     // Get random sparkle color
     function getRandomSparkleColor() {
-        const colors = ['#ffd700', '#ffed4e', '#ffeb3b', '#fff176', '#fff59d', '#ffc107'];
+        const colors = ['#ffd700', '#ffed4e', '#ffeb3b', '#fff176'];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
     // Start creating romantic elements immediately when the website starts
     function startAnimations() {
-        createHearts();
-        createRosePetals();
-        createCupids();
-        createLoveLetters();
+        // Only start animations if not on low-end device
+        if (!isLowEndDevice()) {
+            createHearts();
+            createRosePetals();
+            createCupids();
+            createLoveLetters();
+        } else {
+            // On low-end devices, create minimal elements
+            setTimeout(() => {
+                if (elementCount < 5) {
+                    const heart = $('<div>❤</div>');
+                    heart.addClass('heart');
+                    heart.css({
+                        'left': '50%',
+                        'animationDuration': '60s',
+                        'fontSize': '1rem',
+                        'opacity': '0.3'
+                    });
+                    $('body').append(heart);
+                    elementCount++;
+                }
+            }, 5000);
+        }
     }
 
     // Detect low-end devices
@@ -368,45 +388,17 @@ $(document).ready(function() {
     }
 
     function createThankYouHearts() {
-        // Add more hearts when Yes is clicked
-        for (let i = 0; i < 15; i++) { // Increased from 8 to 15
+        // Add fewer hearts when Yes is clicked for better performance
+        for (let i = 0; i < 8; i++) { // Reduced from 15 to 8
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const heart = $('<div>❤</div>');
-                heart.addClass('heart');
-                heart.css({
-                    'left': Math.random() * 100 + 'vw',
-                    'animationDuration': (Math.random() * 3 + 2) + 's',
-                    'fontSize': (Math.random() * 20 + 15) + 'px', // Larger hearts
-                    'color': getRandomColor()
-                });
-                $('body').append(heart);
-                elementCount++;
-
-                // Remove heart after animation completes
-                setTimeout(() => {
-                    heart.remove();
-                    elementCount--;
-                }, 4000);
-            }, i * 100); // Faster creation
-        }
-    }
-
-    // Trigger special animation for the final page
-    function triggerFinalPageAnimation() {
-        // Add extra romantic elements for the final page
-        for (let i = 0; i < 10; i++) {
-            setTimeout(() => {
-                if (elementCount >= maxElements) return;
-                
-                // Create extra hearts
                 const heart = $('<div>❤</div>');
                 heart.addClass('heart');
                 heart.css({
                     'left': Math.random() * 100 + 'vw',
                     'animationDuration': (Math.random() * 4 + 3) + 's',
-                    'fontSize': (Math.random() * 25 + 20) + 'px', // Even larger hearts
+                    'fontSize': (Math.random() * 15 + 10) + 'px', // Smaller hearts
                     'color': getRandomColor()
                 });
                 $('body').append(heart);
@@ -417,7 +409,35 @@ $(document).ready(function() {
                     heart.remove();
                     elementCount--;
                 }, 5000);
-            }, i * 200);
+            }, i * 150); // Slower creation
+        }
+    }
+
+    // Trigger special animation for the final page
+    function triggerFinalPageAnimation() {
+        // Add fewer extra romantic elements for the final page
+        for (let i = 0; i < 5; i++) { // Reduced from 10 to 5
+            setTimeout(() => {
+                if (elementCount >= maxElements) return;
+                
+                // Create extra hearts
+                const heart = $('<div>❤</div>');
+                heart.addClass('heart');
+                heart.css({
+                    'left': Math.random() * 100 + 'vw',
+                    'animationDuration': (Math.random() * 5 + 4) + 's',
+                    'fontSize': (Math.random() * 20 + 15) + 'px', // Smaller hearts
+                    'color': getRandomColor()
+                });
+                $('body').append(heart);
+                elementCount++;
+
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    heart.remove();
+                    elementCount--;
+                }, 6000);
+            }, i * 300); // Slower creation
         }
     }
 
