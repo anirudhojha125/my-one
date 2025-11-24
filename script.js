@@ -24,15 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Performance optimization: limit the number of elements
     let elementCount = 0;
-    const maxElements = 25; // Slightly increased for more animations
+    const maxElements = 30; // Increased for more animations
 
     // Track active love letters
     let activeLetters = [];
 
-    // Create floating hearts for Valentine's theme - minimal
+    // Create floating hearts for Valentine's theme
     function createHearts() {
-        // Only create 5 hearts total
-        for (let i = 0; i < 5; i++) {
+        // Create 8 hearts total for more animation
+        for (let i = 0; i < 8; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 heart.innerHTML = '❤';
                 heart.classList.add('heart');
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = '40s';
-                heart.style.fontSize = '1.2rem'; // Slightly larger
-                heart.style.opacity = '0.5';
-                heart.style.color = '#ff6b6b';
+                heart.style.animationDuration = Math.random() * 15 + 10 + 's'; // Variable speeds
+                heart.style.fontSize = Math.random() * 15 + 10 + 'px'; // Variable sizes
+                heart.style.opacity = Math.random() * 0.5 + 0.3; // Variable opacity
+                heart.style.color = getRandomColor();
                 document.body.appendChild(heart);
                 elementCount++;
 
@@ -55,15 +55,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isLowEndDevice()) {
                         createHearts();
                     }
-                }, 40000);
-            }, i * 2000);
+                }, parseFloat(heart.style.animationDuration) * 1000);
+            }, i * 500); // Faster creation
         }
     }
 
-    // Create rose petals - minimal
+    // Create rose petals
     function createRosePetals() {
-        // Only create 3 petals total
-        for (let i = 0; i < 3; i++) {
+        // Create 5 petals total for more animation
+        for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 petal.innerHTML = '🌹';
                 petal.classList.add('rose-petal');
                 petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = '80s';
-                petal.style.fontSize = '1.2rem'; // Slightly larger
-                petal.style.opacity = '0.4';
+                petal.style.animationDuration = Math.random() * 20 + 15 + 's'; // Variable speeds
+                petal.style.fontSize = Math.random() * 15 + 10 + 'px'; // Variable sizes
+                petal.style.opacity = Math.random() * 0.4 + 0.2; // Variable opacity
                 document.body.appendChild(petal);
                 elementCount++;
 
@@ -85,8 +85,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isLowEndDevice()) {
                         createRosePetals();
                     }
-                }, 80000);
-            }, i * 5000);
+                }, parseFloat(petal.style.animationDuration) * 1000);
+            }, i * 800); // Faster creation
+        }
+    }
+
+    // Create floating cupids
+    function createCupids() {
+        // Create 3 cupids total for more animation
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                if (elementCount >= maxElements) return;
+                
+                const cupid = document.createElement('div');
+                cupid.innerHTML = '🏹';
+                cupid.classList.add('cupid');
+                cupid.style.top = Math.random() * 100 + 'vh';
+                cupid.style.animationDuration = Math.random() * 40 + 30 + 's'; // Variable speeds
+                cupid.style.fontSize = Math.random() * 20 + 15 + 'px'; // Variable sizes
+                cupid.style.opacity = Math.random() * 0.6 + 0.3; // Variable opacity
+                document.body.appendChild(cupid);
+                elementCount++;
+
+                // Remove cupid after animation completes
+                setTimeout(() => {
+                    cupid.remove();
+                    elementCount--;
+                    // Create a new one to replace it
+                    if (!isLowEndDevice()) {
+                        createCupids();
+                    }
+                }, parseFloat(cupid.style.animationDuration) * 1000);
+            }, i * 2000); // Faster creation
         }
     }
 
@@ -130,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Track this letter
                 activeLetters.push(letter);
                 
-                // Remove letter after 15 seconds
+                // Remove letter after 10 seconds (faster)
                 setTimeout(() => {
                     const index = activeLetters.indexOf(letter);
                     if (index > -1) {
@@ -140,23 +170,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         letter.remove();
                         elementCount--;
                     }
-                }, 15000);
+                }, 10000);
             }
-        }, 8000); // Create new letter every 8 seconds
+        }, 5000); // Create new letter every 5 seconds (more frequent)
     }
 
     // Create romantic sparkles when buttons are hovered
     function createSparkles(x, y) {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 8; i++) { // More sparkles
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
                 const sparkle = document.createElement('div');
                 sparkle.innerHTML = '✨';
                 sparkle.classList.add('romantic-sparkle');
-                sparkle.style.left = (x + (Math.random() * 40 - 20)) + 'px';
-                sparkle.style.top = (y + (Math.random() * 40 - 20)) + 'px';
+                sparkle.style.left = (x + (Math.random() * 60 - 30)) + 'px'; // Wider spread
+                sparkle.style.top = (y + (Math.random() * 60 - 30)) + 'px'; // Wider spread
                 sparkle.style.color = getRandomSparkleColor();
+                sparkle.style.fontSize = Math.random() * 20 + 15 + 'px'; // Variable sizes
                 document.body.appendChild(sparkle);
                 elementCount++;
 
@@ -164,43 +195,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     sparkle.remove();
                     elementCount--;
-                }, 3000);
-            }, i * 100);
+                }, 2000); // Faster removal
+            }, i * 50); // Faster creation
         }
     }
 
     // Get random romantic color for text
     function getRandomColor() {
-        const colors = ['#ff6b6b', '#ff8e8e', '#ffb3c1', '#ffccd5', '#ff758f', '#ff4d6d'];
+        const colors = ['#ff6b6b', '#ff8e8e', '#ffb3c1', '#ffccd5', '#ff758f', '#ff4d6d', '#d32f2f'];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
     // Get random sparkle color
     function getRandomSparkleColor() {
-        const colors = ['#ffd700', '#ffed4e', '#ffeb3b', '#fff176', '#fff59d'];
+        const colors = ['#ffd700', '#ffed4e', '#ffeb3b', '#fff176', '#fff59d', '#ffc107'];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
-    // Start creating romantic elements - but only if not on low-end device
-    if (!isLowEndDevice()) {
+    // Start creating romantic elements immediately when the website starts
+    function startAnimations() {
         createHearts();
         createRosePetals();
+        createCupids();
         createLoveLetters();
-    } else {
-        // On low-end devices, create minimal elements
-        setTimeout(() => {
-            if (elementCount < 5) {
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤';
-                heart.classList.add('heart');
-                heart.style.left = '50%';
-                heart.style.animationDuration = '60s';
-                heart.style.fontSize = '1rem';
-                heart.style.opacity = '0.3';
-                document.body.appendChild(heart);
-                elementCount++;
-            }
-        }, 5000);
     }
 
     // Detect low-end devices
@@ -238,6 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
         page1.classList.remove('active');
         page4.classList.add('active');
         createThankYouHearts();
+        triggerFinalPageAnimation();
     });
 
     // Page 2 - "Are you sure? I can get you chocolates 🍫"
@@ -252,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         page2.classList.remove('active');
         page4.classList.add('active');
         createThankYouHearts();
+        triggerFinalPageAnimation();
     });
 
     // Page 3 - "Sooooorryyy forgive me 🙏 Unlimited body massages? 💆‍♀️"
@@ -260,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         page3.classList.remove('active');
         page4.classList.add('active');
         createThankYouHearts();
+        triggerFinalPageAnimation();
     });
 
     noBtn3.addEventListener('click', function() {
@@ -344,8 +364,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createThankYouHearts() {
-        // Add minimal hearts when Yes is clicked
-        for (let i = 0; i < 8; i++) { // Increased from 5 to 8
+        // Add more hearts when Yes is clicked
+        for (let i = 0; i < 15; i++) { // Increased from 8 to 15
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
@@ -354,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 heart.classList.add('heart');
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-                heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px'; // Larger hearts
                 heart.style.color = getRandomColor();
                 document.body.appendChild(heart);
                 elementCount++;
@@ -364,7 +384,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     heart.remove();
                     elementCount--;
                 }, 4000);
-            }, i * 150); // Faster creation
+            }, i * 100); // Faster creation
         }
     }
+
+    // Trigger special animation for the final page
+    function triggerFinalPageAnimation() {
+        // Add extra romantic elements for the final page
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                if (elementCount >= maxElements) return;
+                
+                // Create extra hearts
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 4 + 3 + 's';
+                heart.style.fontSize = Math.random() * 25 + 20 + 'px'; // Even larger hearts
+                heart.style.color = getRandomColor();
+                document.body.appendChild(heart);
+                elementCount++;
+
+                // Remove heart after animation completes
+                setTimeout(() => {
+                    heart.remove();
+                    elementCount--;
+                }, 5000);
+            }, i * 200);
+        }
+    }
+
+    // Start animations immediately when the website loads
+    startAnimations();
 });
