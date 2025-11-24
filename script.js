@@ -1,21 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function() {
     // Page elements
-    const page1 = document.getElementById('page1');
-    const page2 = document.getElementById('page2');
-    const page3 = document.getElementById('page3');
-    const page4 = document.getElementById('page4');
+    const page1 = $('#page1');
+    const page2 = $('#page2');
+    const page3 = $('#page3');
+    const page4 = $('#page4');
     
     // Buttons for page 1
-    const yesBtn1 = document.getElementById('yesBtn1');
-    const noBtn1 = document.getElementById('noBtn1');
+    const yesBtn1 = $('#yesBtn1');
+    const noBtn1 = $('#noBtn1');
     
     // Buttons for page 2
-    const yesBtn2 = document.getElementById('yesBtn2');
-    const noBtn2 = document.getElementById('noBtn2');
+    const yesBtn2 = $('#yesBtn2');
+    const noBtn2 = $('#noBtn2');
     
     // Buttons for page 3
-    const yesBtn3 = document.getElementById('yesBtn3');
-    const noBtn3 = document.getElementById('noBtn3');
+    const yesBtn3 = $('#yesBtn3');
+    const noBtn3 = $('#noBtn3');
     
     // Click counts for each button
     let clickCount1 = 0;
@@ -36,15 +36,16 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤';
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 15 + 10 + 's'; // Variable speeds
-                heart.style.fontSize = Math.random() * 15 + 10 + 'px'; // Variable sizes
-                heart.style.opacity = Math.random() * 0.5 + 0.3; // Variable opacity
-                heart.style.color = getRandomColor();
-                document.body.appendChild(heart);
+                const heart = $('<div>❤</div>');
+                heart.addClass('heart');
+                heart.css({
+                    'left': Math.random() * 100 + 'vw',
+                    'animationDuration': (Math.random() * 15 + 10) + 's',
+                    'fontSize': (Math.random() * 15 + 10) + 'px',
+                    'opacity': (Math.random() * 0.5 + 0.3),
+                    'color': getRandomColor()
+                });
+                $('body').append(heart);
                 elementCount++;
 
                 // Remove heart after animation completes
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isLowEndDevice()) {
                         createHearts();
                     }
-                }, parseFloat(heart.style.animationDuration) * 1000);
+                }, parseFloat(heart.css('animationDuration')) * 1000);
             }, i * 500); // Faster creation
         }
     }
@@ -67,14 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const petal = document.createElement('div');
-                petal.innerHTML = '🌹';
-                petal.classList.add('rose-petal');
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = Math.random() * 20 + 15 + 's'; // Variable speeds
-                petal.style.fontSize = Math.random() * 15 + 10 + 'px'; // Variable sizes
-                petal.style.opacity = Math.random() * 0.4 + 0.2; // Variable opacity
-                document.body.appendChild(petal);
+                const petal = $('<div>🌹</div>');
+                petal.addClass('rose-petal');
+                petal.css({
+                    'left': Math.random() * 100 + 'vw',
+                    'animationDuration': (Math.random() * 20 + 15) + 's',
+                    'fontSize': (Math.random() * 15 + 10) + 'px',
+                    'opacity': (Math.random() * 0.4 + 0.2)
+                });
+                $('body').append(petal);
                 elementCount++;
 
                 // Remove petal after animation completes
@@ -85,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isLowEndDevice()) {
                         createRosePetals();
                     }
-                }, parseFloat(petal.style.animationDuration) * 1000);
+                }, parseFloat(petal.css('animationDuration')) * 1000);
             }, i * 800); // Faster creation
         }
     }
@@ -97,14 +99,15 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const cupid = document.createElement('div');
-                cupid.innerHTML = '🏹';
-                cupid.classList.add('cupid');
-                cupid.style.top = Math.random() * 100 + 'vh';
-                cupid.style.animationDuration = Math.random() * 40 + 30 + 's'; // Variable speeds
-                cupid.style.fontSize = Math.random() * 20 + 15 + 'px'; // Variable sizes
-                cupid.style.opacity = Math.random() * 0.6 + 0.3; // Variable opacity
-                document.body.appendChild(cupid);
+                const cupid = $('<div>🏹</div>');
+                cupid.addClass('cupid');
+                cupid.css({
+                    'top': Math.random() * 100 + 'vh',
+                    'animationDuration': (Math.random() * 40 + 30) + 's',
+                    'fontSize': (Math.random() * 20 + 15) + 'px',
+                    'opacity': (Math.random() * 0.6 + 0.3)
+                });
+                $('body').append(cupid);
                 elementCount++;
 
                 // Remove cupid after animation completes
@@ -115,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isLowEndDevice()) {
                         createCupids();
                     }
-                }, parseFloat(cupid.style.animationDuration) * 1000);
+                }, parseFloat(cupid.css('animationDuration')) * 1000);
             }, i * 2000); // Faster creation
         }
     }
@@ -149,20 +152,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create a new letter
             if (elementCount < maxElements) {
                 const randomIndex = Math.floor(Math.random() * letters.length);
-                const letter = document.createElement('div');
-                letter.classList.add('love-letter');
-                letter.innerHTML = letters[randomIndex];
-                letter.style.left = Math.random() * 70 + 10 + 'vw';
-                letter.style.top = Math.random() * 70 + 10 + 'vh';
-                document.body.appendChild(letter);
+                const letter = $('<div></div>');
+                letter.addClass('love-letter');
+                letter.html(letters[randomIndex]);
+                letter.css({
+                    'left': (Math.random() * 70 + 10) + 'vw',
+                    'top': (Math.random() * 70 + 10) + 'vh'
+                });
+                $('body').append(letter);
                 elementCount++;
                 
                 // Track this letter
-                activeLetters.push(letter);
+                activeLetters.push(letter[0]);
                 
                 // Remove letter after 10 seconds (faster)
                 setTimeout(() => {
-                    const index = activeLetters.indexOf(letter);
+                    const index = activeLetters.indexOf(letter[0]);
                     if (index > -1) {
                         activeLetters.splice(index, 1);
                     }
@@ -181,14 +186,15 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.classList.add('romantic-sparkle');
-                sparkle.style.left = (x + (Math.random() * 60 - 30)) + 'px'; // Wider spread
-                sparkle.style.top = (y + (Math.random() * 60 - 30)) + 'px'; // Wider spread
-                sparkle.style.color = getRandomSparkleColor();
-                sparkle.style.fontSize = Math.random() * 20 + 15 + 'px'; // Variable sizes
-                document.body.appendChild(sparkle);
+                const sparkle = $('<div>✨</div>');
+                sparkle.addClass('romantic-sparkle');
+                sparkle.css({
+                    'left': (x + (Math.random() * 60 - 30)) + 'px', // Wider spread
+                    'top': (y + (Math.random() * 60 - 30)) + 'px', // Wider spread
+                    'color': getRandomSparkleColor(),
+                    'fontSize': (Math.random() * 20 + 15) + 'px' // Variable sizes
+                });
+                $('body').append(sparkle);
                 elementCount++;
 
                 // Remove sparkle after animation completes
@@ -234,75 +240,73 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add sparkle effect to buttons on hover
-    [yesBtn1, noBtn1, yesBtn2, noBtn2, yesBtn3, noBtn3].forEach(button => {
-        button.addEventListener('mouseenter', function(e) {
-            const rect = button.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            createSparkles(x, y);
-        });
+    $('.btn').on('mouseenter', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        createSparkles(x, y);
     });
 
     // Page 1 - "Are you mad at me?"
-    yesBtn1.addEventListener('click', function() {
+    yesBtn1.on('click', function() {
         // Go to page 2
-        page1.classList.remove('active');
-        page2.classList.add('active');
+        page1.removeClass('active');
+        page2.addClass('active');
     });
 
-    noBtn1.addEventListener('click', function() {
+    noBtn1.on('click', function() {
         // Go directly to the final page (page 4)
-        page1.classList.remove('active');
-        page4.classList.add('active');
+        page1.removeClass('active');
+        page4.addClass('active');
         createThankYouHearts();
         triggerFinalPageAnimation();
     });
 
     // Page 2 - "Are you sure? I can get you chocolates 🍫"
-    yesBtn2.addEventListener('click', function() {
+    yesBtn2.on('click', function() {
         // Go to page 3
-        page2.classList.remove('active');
-        page3.classList.add('active');
+        page2.removeClass('active');
+        page3.addClass('active');
     });
 
-    noBtn2.addEventListener('click', function() {
+    noBtn2.on('click', function() {
         // Go directly to the final page (page 4)
-        page2.classList.remove('active');
-        page4.classList.add('active');
+        page2.removeClass('active');
+        page4.addClass('active');
         createThankYouHearts();
         triggerFinalPageAnimation();
     });
 
     // Page 3 - "Sooooorryyy forgive me 🙏 Unlimited body massages? 💆‍♀️"
-    yesBtn3.addEventListener('click', function() {
+    yesBtn3.on('click', function() {
         // Go directly to the final page (page 4)
-        page3.classList.remove('active');
-        page4.classList.add('active');
+        page3.removeClass('active');
+        page4.addClass('active');
         createThankYouHearts();
         triggerFinalPageAnimation();
     });
 
-    noBtn3.addEventListener('click', function() {
+    noBtn3.on('click', function() {
         clickCount3++;
         
         if (clickCount3 < 3) {
             // Shrink the button by reducing its scale (10% each time)
             const scale = 1 - (clickCount3 * 0.1);
-            noBtn3.style.transform = `scale(${scale})`;
+            $(this).css('transform', `scale(${scale})`);
         } else {
             // Starting from the 3rd click, move the button to a random position within the dialog box
-            moveButtonWithinDialogBox(noBtn3, yesBtn3);
+            moveButtonWithinDialogBox($(this), yesBtn3);
         }
     });
 
     function moveButtonWithinDialogBox(noButton, yesButton) {
         // Get the container element
-        const container = document.querySelector('.container');
-        const containerRect = container.getBoundingClientRect();
+        const container = $('.container');
+        const containerRect = container[0].getBoundingClientRect();
         
         // Get button dimensions
-        const buttonWidth = noButton.offsetWidth;
-        const buttonHeight = noButton.offsetHeight;
+        const buttonWidth = noButton.outerWidth();
+        const buttonHeight = noButton.outerHeight();
         
         // Define safe boundaries within the container with padding
         const padding = 20;
@@ -312,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxY = containerRect.bottom - buttonHeight - padding;
         
         // Get yes button position to avoid overlapping
-        const yesButtonRect = yesButton.getBoundingClientRect();
+        const yesButtonRect = yesButton[0].getBoundingClientRect();
         const yesButtonLeft = yesButtonRect.left;
         const yesButtonRight = yesButtonRect.right;
         const yesButtonTop = yesButtonRect.top;
@@ -347,19 +351,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Reset button styles to ensure visibility
-        noButton.style.position = 'fixed';
-        noButton.style.transform = 'scale(1)';
-        noButton.style.zIndex = '9999';
-        noButton.style.margin = '0';
-        noButton.style.display = 'block';
-        
-        // Position the button
-        noButton.style.left = randomX + 'px';
-        noButton.style.top = randomY + 'px';
+        noButton.css({
+            'position': 'fixed',
+            'transform': 'scale(1)',
+            'zIndex': '9999',
+            'margin': '0',
+            'display': 'block',
+            'left': randomX + 'px',
+            'top': randomY + 'px'
+        });
         
         // Ensure button stays visible
         setTimeout(() => {
-            noButton.style.display = 'block';
+            noButton.css('display', 'block');
         }, 10);
     }
 
@@ -369,14 +373,15 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (elementCount >= maxElements) return;
                 
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤';
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-                heart.style.fontSize = Math.random() * 20 + 15 + 'px'; // Larger hearts
-                heart.style.color = getRandomColor();
-                document.body.appendChild(heart);
+                const heart = $('<div>❤</div>');
+                heart.addClass('heart');
+                heart.css({
+                    'left': Math.random() * 100 + 'vw',
+                    'animationDuration': (Math.random() * 3 + 2) + 's',
+                    'fontSize': (Math.random() * 20 + 15) + 'px', // Larger hearts
+                    'color': getRandomColor()
+                });
+                $('body').append(heart);
                 elementCount++;
 
                 // Remove heart after animation completes
@@ -396,14 +401,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (elementCount >= maxElements) return;
                 
                 // Create extra hearts
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤';
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 4 + 3 + 's';
-                heart.style.fontSize = Math.random() * 25 + 20 + 'px'; // Even larger hearts
-                heart.style.color = getRandomColor();
-                document.body.appendChild(heart);
+                const heart = $('<div>❤</div>');
+                heart.addClass('heart');
+                heart.css({
+                    'left': Math.random() * 100 + 'vw',
+                    'animationDuration': (Math.random() * 4 + 3) + 's',
+                    'fontSize': (Math.random() * 25 + 20) + 'px', // Even larger hearts
+                    'color': getRandomColor()
+                });
+                $('body').append(heart);
                 elementCount++;
 
                 // Remove heart after animation completes
