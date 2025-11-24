@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: valentines-interactive-website
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 8080
