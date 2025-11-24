@@ -31,3 +31,38 @@ A beautifully designed interactive website with romantic animations and playful 
 - Responsive design that works on all device sizes
 - Performance optimized for low-end devices
 - No external dependencies
+
+## Deployment
+
+### Local Development
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/anirudhojha125/my-one.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd my-one
+   ```
+3. Start a simple HTTP server:
+   ```
+   python -m http.server 8000
+   ```
+4. Open your browser and go to http://localhost:8000
+
+### Deploy to Render
+
+1. Fork this repository to your GitHub account (optional)
+2. Log in to your Render account at https://render.com
+3. Click "New" and select "Web Service"
+4. Connect your GitHub repository
+5. Configure the service:
+   - Name: valentines-interactive-website
+   - Environment: Node
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+   - Instance Type: Free
+6. Click "Create Web Service"
+7. Render will automatically deploy your website
+
+Your website will be available at `https://valentines-interactive-website-xxx.onrender.com` (the URL will be provided by Render after deployment).
